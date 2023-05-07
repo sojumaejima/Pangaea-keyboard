@@ -1,0 +1,12 @@
+#ENCODER_ENABLE = yes
+OLED_ENABLE = no
+OLED_DRIVER = SSD1306
+VIA_ENABLE = no
+LTO_ENABLE = yes
+
+CAPS_WORD_ENABLE = yes
+MOUSEKEY_ENABLE = yes    # Mouse keys
+PERMISSIVE_HOLD = yes
+
+
+#BOOTLOADER = caterina
