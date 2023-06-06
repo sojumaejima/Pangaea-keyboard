@@ -17,19 +17,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
+#include "maejima.h"
 
 #define _QWERTY 0
 #define _LOWER  1
 #define _RAISE  2
 #define _ADJUST 3
 
+/*
 // Defines the keycodes used by our macros in process_record_user
 enum custom_keycodes {
- QWERTY = SAFE_RANGE, // Default layer
+ QWERTY = NEW_SAFE_RANGE, // Default layer
  LOWER,   // Layer 1
  RAISE,   // Layer 2
  ADJUST,  // Layer 3
 };
+*/
 
 #ifdef ENCODER_ENABLE
 // Potentiometer, Rotary encoder
@@ -46,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB ,KC_Q   ,KC_W   ,   KC_E,   KC_R,   KC_T,                                   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,KC_BSPC,
   LCTL_T(KC_TAB),KC_A,KC_S,  KC_D,   KC_F,   KC_G,_______,_______,_______,_______,   KC_H,   KC_J,   KC_K,   KC_L,KC_SCLN,RGUI_T(KC_QUOT),
   KC_LSFT,KC_Z   ,KC_X   ,   KC_C,   KC_V,   KC_B,KC_LBRC,KC_MUTE,KC_HOME,KC_RBRC,   KC_N,   KC_M,KC_COMM, KC_DOT,RAG_T(KC_SLSH),KC_RSFT,
-          KC_LALT,LGUI_T(KC_LNG2),  MO(1), KC_SPC,KC_ENT,                         KC_BSPC, KC_SPC,  MO(2),RALT_T(KC_LNG1),KC_RCTL,
+          KC_LALT,LGUI_T(KC_LNG2),MO(_LOWER),KC_SPC,KC_ENT,                       KC_BSPC, KC_SPC,MO(_RAISE),RALT_T(KC_LNG1),KC_RCTL,
                   _______,_______,_______,                                                _______,_______,_______
   ),
   [_LOWER] = LAYOUT(
@@ -55,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,   KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                                KC_HOME,KC_PGDN,KC_PGUP, KC_END, KC_EQL, KC_DEL,
   _______,   KC_6,   KC_7,   KC_8,   KC_9,   KC_0,_______,_______,_______,_______,KC_LEFT,KC_DOWN,  KC_UP,KC_RIGHT,KC_MINS,RGUI_T(KC_GRV),
   _______,XXXXXXX,XXXXXXX,KC_COMM, KC_DOT,KC_BSPC,_______,_______,_______,_______,XXXXXXX,XXXXXXX,XXXXXXX,S(KC_1),RAG_T(KC_BSLS),RSFT_T(KC_DEL),
-          _______,_______,_______, KC_ENT,_______,                                _______,KC_BSPC,LT(2,KC_ENT),_______,_______,
+          _______,_______,_______, KC_ENT,_______,                                _______,KC_BSPC,LT(_ADJUST,KC_ENT),_______,_______,
                   _______,_______,_______,                                                _______,_______,_______
    ),
   [_RAISE] = LAYOUT(
@@ -64,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,KC_LABK,KC_LBRC,KC_LCBR,KC_LPRN,KC_LABK,                                S(KC_1),S(KC_2),S(KC_3),S(KC_4),S(KC_5),A(KC_BSPC),
   _______,KC_RABK,KC_RBRC,KC_RCBR,KC_RPRN,KC_RABK,_______,_______,_______,_______,S(KC_6),S(KC_7),S(KC_8),S(KC_9),S(KC_0),XXXXXXX,
   _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
-          _______,_______,LT(1,KC_ENT),KC_ESC,_______,                            _______,_______,_______,_______,_______,
+          _______,_______,LT(_ADJUST,KC_ENT),KC_ESC,_______,                            _______,_______,_______,_______,_______,
                   _______,_______,_______,                                                _______,_______,_______
   ),
   [_ADJUST] = LAYOUT(
@@ -79,47 +82,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-// Layers and macros
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    update_tri_layer(_LOWER, _RAISE, _ADJUST);
-//  switch (keycode) {
-//   case QWERTY:
-//      if (record->event.pressed) {
-//        set_single_persistent_default_layer(_QWERTY);
-//      }
-//      return false;
-//      break;
-//    case LOWER:
-//      if (record->event.pressed) {
-//        layer_on(_LOWER);
-//        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-//      } else {
-//        layer_off(_LOWER);
-//        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-//      }
-//      return false;
-//      break;
-//    case RAISE:
-//      if (record->event.pressed) {
-//        layer_on(_RAISE);
-//        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-//      } else {
-//        layer_off(_RAISE);
-//        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-//      }
-//      return false;
-//      break;
-//    case ADJUST:
-//      if (record->event.pressed) {
-//        layer_on(_ADJUST);
-//      } else {
-//        layer_off(_ADJUST);
-//      }
-//      return false;
-//      break;
-//  }
-  return true;
+layer_state_t layer_state_set_user(layer_state_t state) {
+    state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+    return state;
 }
+
+/*
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
+    return true;
+}
+*/
 
 #ifdef ENCODER_ENABLE
 // Rotary encoder
