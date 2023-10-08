@@ -37,6 +37,7 @@ The Pangaea Keyboard has a wide variety of optional features that allow you to s
     - [Solder switches on PCB without sockets](#solder-switches-on-pcb-without-sockets)
     - [Height adjustment](#height-adjustment)
     - [Tilts and Tents](#tilts-and-tents)
+    - [Preventing PCBs from falling out](#preventing-pcbs-from-falling-out)
     - [Tape LED](#tape-led)
     - [Delete number rows](#delete-number-rows)
     - [Rotary encoder](#rotary-encoder)
@@ -120,7 +121,7 @@ The standard configuration described in this build guide is as follows,
 | Pinkey bridge palte                                   | 2    | Common parts for both side                                   |
 | Thumb bridge plate                                    | 2    | Common parts for both side                                   |
 | --- **Electric patrs** ---                            |      |                                                              |
-| ProMicro or compatible                                | 2    | ATmega32U4                                                   |
+| ProMicro or compatible                                | 2    | ATmega32U4, 5V                                               |
 | Pin header                                            | 4    | Included with ProMicro                                       |
 | Tact switch for reset                                 | 1*   | *It can also be omitted.<BR/>(It cannot be installed on the right side.)|
 | 3.5mm TRRS jack                                       | 2    |                                                              |
@@ -622,6 +623,14 @@ Also, in the z-axis direction, the length of the standoffs can be made a little 
 As an application of height adjustment, the tilt and tent angle of each module can be adjusted by combining spacers of different lengths.
 
 For example, Main plate can be height adjusted in the z-axis direction. The two standoffs in the center direction can be raised and tilted toward the center.  Be careful not to tighten the screws too hard, as this will put a load on the PCB and the plate.
+
+### Preventing PCBs from falling out
+
+The PCB and bottom plate have M1.4 screw holes. The PCB can be supported by inserting screws into those holes and using nuts.  Refer to the following pictures for more information.
+
+<img src="images/IMG_9326.jpg" alt="-" style="zoom: 30%;" /> 
+<img src="images/IMG_9321.jpg" alt="-" style="zoom: 30%;" /> 
+<img src="images/IMG_9327.jpg" alt="-" style="zoom: 30%;" />
 
 ### Tape LED
 

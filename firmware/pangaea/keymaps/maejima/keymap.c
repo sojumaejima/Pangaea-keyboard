@@ -17,22 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
-#include "maejima.h"
 
 #define _QWERTY 0
 #define _LOWER  1
 #define _RAISE  2
 #define _ADJUST 3
 
-/*
-// Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes {
- QWERTY = NEW_SAFE_RANGE, // Default layer
- LOWER,   // Layer 1
- RAISE,   // Layer 2
- ADJUST,  // Layer 3
-};
-*/
 
 #ifdef ENCODER_ENABLE
 // Potentiometer, Rotary encoder
@@ -92,7 +82,6 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 */
-
 #ifdef ENCODER_ENABLE
 // Rotary encoder
 bool encoder_update_user(uint8_t index, bool clockwise) {
