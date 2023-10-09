@@ -78,7 +78,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 #endif
 };
-
 #ifdef ENCODER_ENABLE
 // Rotary encoder
 bool encoder_update_user(uint8_t index, bool clockwise) {

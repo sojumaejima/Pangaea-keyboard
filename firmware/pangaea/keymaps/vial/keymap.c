@@ -28,8 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum custom_keycodes {
  QWERTY = SAFE_RANGE, // default layer
  LOWER,   // Layer1
- RAISE,   // Layer2
- ADJUST,  // Layer3
+ RAISE    // Layer2
 };
 
 #ifdef ENCODER_ENABLE
@@ -69,16 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F7,  KC_F8,  KC_F9, KC_F10, KC_F11, KC_F12,QK_BOOT,_______, _______,_______,KC_PLUS,KC_MINS, KC_EQL,KC_LBRC,KC_RBRC,KC_BSLS,
           _______,_______,_______,_______,_______,                                 _______,_______,_______,_______,_______,
                   _______,_______,_______,                                         _______,_______,_______
-  ),
-  [_ADJUST] = LAYOUT(
-  _______,_______,_______,_______,_______,_______,                                 _______,_______,_______,_______,_______,_______,
-  _______,_______,_______,_______,_______,_______,                                 _______,_______,_______,_______,_______,_______,
-  _______,_______,_______,_______,_______,_______,                                 _______,_______,_______,_______,_______,_______,
-  _______,_______,_______,_______,_______,_______,_______, _______,_______,_______,_______,_______,_______,_______,_______,_______,
-    KC_F7,  KC_F8,  KC_F9, KC_F10, KC_F11, KC_F12,QK_BOOT,_______, _______,_______, KC_F13, KC_F14, KC_F15, KC_F16, KC_F17,KC_F18 ,
-          _______,_______,_______,_______,_______,                                 _______,_______,_______,_______,_______,
-                  _______,_______,_______,                                                 _______,_______,_______
-  ),
+  )
 };
 
 
@@ -104,31 +94,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        //update_tri_layer(_LOWER, _RAISE, _ADJUST);
       } else {
         layer_off(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        //update_tri_layer(_LOWER, _RAISE, _ADJUST);
       }
       return false;
       break;
     case RAISE:
       if (record->event.pressed) {
         layer_on(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        //update_tri_layer(_LOWER, _RAISE, _ADJUST);
       } else {
         layer_off(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        //update_tri_layer(_LOWER, _RAISE, _ADJUST);
       }
       return false;
       break;
-    case ADJUST:
-      if (record->event.pressed) {
-        layer_on(_ADJUST);
-      } else {
-        layer_off(_ADJUST);
-      }
-      return false;
-      break;
+    //case ADJUST:
+      //if (record->event.pressed) {
+        //layer_on(_ADJUST);
+      //} else {
+        //layer_off(_ADJUST);
+      //}
+      //return false;
+      //break;
   }
   return true;
 }
